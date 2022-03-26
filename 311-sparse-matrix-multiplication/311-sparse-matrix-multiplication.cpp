@@ -9,12 +9,16 @@ public:
         
         vector<vector<int>> ans(m, vector<int>(n));
         
+        //O(m*n*k)
+              
+        //O(m*k)
         for(int r=0; r<m; r++)
         {
-            for(int c=0; c<n; c++)
+            for(int i=0; i<k; i++)
             {
-                
-                    for(int i=0; i<k; i++)
+                if(mat1[r][i] != 0)
+                {
+                    for(int c=0; c<n; c++)
                     {
                         //0 0   0 0
                         //0 1   1 0
@@ -27,9 +31,8 @@ public:
                         
                         ans[r][c] += mat1[r][i] * mat2[i][c];
                     }
+                }
                     
-                
-                
                 
             }
         }
