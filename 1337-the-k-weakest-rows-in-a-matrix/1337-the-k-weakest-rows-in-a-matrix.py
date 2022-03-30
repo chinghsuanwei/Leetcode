@@ -4,7 +4,7 @@ class Solution:
         #simple sort
         #return sorted(range(len(mat)), key=lambda x: sum(mat[x]))[:k];
         
-        #bucket sort
+        #simple sort either
         arr = []
         for idx, row in enumerate(mat) :
             arr.append( (sum(row), idx) )
