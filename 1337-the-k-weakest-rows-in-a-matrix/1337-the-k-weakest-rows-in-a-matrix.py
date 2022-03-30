@@ -15,11 +15,8 @@ class Solution:
         
         result = []
         for i in range(101):
-            for j, idx in enumerate(buckets[i]):
-                result.append(idx)
-                k -= 1
-                if k == 0: return result
-                           
+            result.extend(buckets[i])
+            
         
-        return result
+        return result[:k]
         
