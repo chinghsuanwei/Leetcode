@@ -4,16 +4,22 @@ class Solution:
         #simple sort
         #return sorted(range(len(mat)), key=lambda x: sum(mat[x]))[:k];
         
-        #simple sort either
-        arr = []
-        for idx, row in enumerate(mat) :
-            arr.append( (sum(row), idx) )
-            
-        result = sorted(arr)[:k]
         
-        result2 = []
-        for idx, d in enumerate(result):
-            result2.append(d[1])
-            
-        return result2
+        
+        #bucket sort
+        buckets = [list() for _ in range(101)]
+        
+        for idx, row in enumerate(mat):
+            j = bisect.bisect_left(row, 0, key=lambda idx: -idx)
+            buckets[j].append(idx)
+        
+        result = []
+        for i in range(101):
+            for j, idx in enumerate(buckets[i]):
+                result.append(idx)
+                k -= 1
+                if k == 0: return result
+                           
+        
+        return result
         
