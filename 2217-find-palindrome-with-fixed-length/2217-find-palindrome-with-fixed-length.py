@@ -45,8 +45,6 @@ class Solution:
                 # 3 
                 if intLength == 1:
                     ans.append(q)
-                elif intLength == 2:
-                    ans.append(q * 10 + q)
                 else:
                     num = (10 ** p) - 1
                     num += q
