@@ -31,6 +31,27 @@ class Solution:
         
         return pre
     
+    def swap(self, pre1: Optional[ListNode], pre2: Optional[ListNode]):
+        
+        node1 = pre1.next
+        node2 = pre2.next
+
+        next1 = node1.next
+        if pre1.next == pre2:
+            next1 = node1
+
+
+        next2 = node2.next
+        if pre2.next == pre1:
+            next2 = node2
+
+
+        pre1.next = node2
+        pre2.next = node1
+
+        node1.next = next2
+        node2.next = next1
+    
     def swapNodes(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
         
         #find length and also kth node
@@ -42,73 +63,95 @@ class Solution:
         
         n = self.getSizehOfLinkedList(head)
         
-        if k == n - k + 1:
+        
+        idx1, idx2 = k, n - k + 1
+        
+        if idx1 == idx2:
             return head
+        
+        
+        
         
         sentinel = ListNode()
         sentinel.next = head
         
-        pre1 = self.findPreviousNode(head, sentinel, k)
-        pre2 = self.findPreviousNode(head, sentinel, n - k + 1)
+        pre1 = self.findPreviousNode(head, sentinel, idx1)
+        pre2 = self.findPreviousNode(head, sentinel, idx2)
           
         # P1  N1 N2
         # O  O　O
-        if pre1.next == pre2:
-            
-            #print("Test 1")
-            
-            #node2 insert to pre1 next    
-            node1 = pre1.next
-            node2 = pre2.next
-            
-            next1 = node1.next
-            next2 = node2.next
-            
-            pre1.next = node2
-            
-            node1.next = next2
-            node2.next = node1
+        
+        self.swap(pre1, pre2)
+#         if pre1.next == pre2:
             
             
-        elif pre2.next == pre1:
-            #node1 insert to pre2 next
+#             #print("Test 1")
             
-            #print("Test 2")
+#             #node2 insert to pre1 next    
+#             node1 = pre1.next
+#             node2 = pre2.next
             
-            # P2  N2 N1
-            # O  O　O
-            
-            node1 = pre1.next
-            node2 = pre2.next
-            
-            next1 = node1.next
-            next2 = node2.next
-            
-            pre2.next = node1
-            
-            node2.next = next1
-            node1.next = node2
-            
-        else:
-            
-            # P1 N1  P2 N2
-            # O  O O O　O
+#             next1 = node1.next
+#             if pre1.next == pre2:
+#                 next1 = node1
             
             
+#             next2 = node2.next
+#             if pre2.next == pre1:
+#                 next2 = node2
             
-            node1 = pre1.next
-            node2 = pre2.next
             
-            #print(node1.val)
+#             pre1.next = node2
+#             pre2.next = node1
             
-            next1 = node1.next
-            next2 = node2.next
+#             node1.next = next2
+#             node2.next = next1
             
-            pre1.next = node2
-            pre2.next = node1
             
-            node1.next = next2
-            node2.next = next1
+#         elif pre2.next == pre1:
+#             #node1 insert to pre2 next
+            
+#             #print("Test 2")
+            
+#             # P2  N2 N1
+#             # O  O　O
+                
+#             node1 = pre1.next
+#             node2 = pre2.next
+            
+#             next1 = node1.next
+#             if pre1.next == pre2:
+#                 next1 = node2
+            
+            
+#             next2 = node2.next
+#             if pre2.next == pre1:
+#                 next2 = node1
+            
+            
+#             pre1.next = node2
+#             pre2.next = node1
+            
+#             node1.next = next2
+#             node2.next = next1
+#         else:
+            
+#             # P1 N1  P2 N2
+#             # O  O O O　O
+            
+#             node1 = pre1.next
+#             node2 = pre2.next
+            
+#             #print(node1.val)
+            
+#             next1 = node1.next
+#             next2 = node2.next
+            
+#             pre1.next = node2
+#             pre2.next = node1
+            
+#             node1.next = next2
+#             node2.next = next1
             
         
         
