@@ -21,7 +21,7 @@ class Solution {
         // 3 2 2+2 4+ (2+2)
         
         
-        long sum = 0;
+        int sum = 0;
         int MOD = 1000_000_000 + 7;
         
         for(int i=0; i<n; i++)
@@ -53,7 +53,7 @@ class Solution {
             sum %= MOD;
         }
         
-        return (int)sum;
+        return sum;
         
     }
 }
