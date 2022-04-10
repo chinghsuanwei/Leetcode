@@ -4,9 +4,9 @@ class Solution {
         int n = arr.length;
         
         
-        int[] prefix = new int[n];
+        int[] dp = new int[n];
         
-        Deque<int[]> dq = new LinkedList<int[]>();
+        Stack<Integer> stack = new Stack<>();
         
         
         // -1 -1 1 2
@@ -23,33 +23,31 @@ class Solution {
         
         int sum = 0;
         int MOD = 1000_000_000 + 7;
+        stack.push(-1);
         
         for(int i=0; i<n; i++)
         {
             int val = arr[i];
             
-            while(dq.size() > 0 && dq.getLast()[1] > val)
+            while(stack.size() > 1 && arr[ stack.peek() ] > val)
             {
-                dq.pollLast();
+                stack.pop();
             }
             
-            int idx = -1;
-            if(dq.size() > 0)
-            {
-                idx = dq.getLast()[0];
-            }
+            int idx = stack.peek();
+            
                 
-            dq.addLast(new int[]{i, val});
+            stack.push(i);
             
-            prefix[i] += (i-idx)*val;
+            dp[i] += (i-idx)*val;
             
             if(idx != -1)
             {
-                prefix[i] += prefix[idx];
+                dp[i] += dp[idx];
                 
             }
             
-            sum += prefix[i];
+            sum += dp[i];
             sum %= MOD;
         }
         
