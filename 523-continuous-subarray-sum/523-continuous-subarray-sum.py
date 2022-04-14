@@ -24,7 +24,6 @@ class Solution:
         bCircle = nums[0] >= k
         zeros = 1 if nums[0] % k == 0 else 0
         
-        last_val = nums[0] % k
         n = len(nums)
         
         
@@ -34,6 +33,8 @@ class Solution:
             cSum += nums[i]
             if nums[i] % k == 0:
                 zeros += 1
+                if zeros >= 2:
+                    return True
             else:
                 zeros = 0
             
@@ -43,10 +44,9 @@ class Solution:
             
             
             
-            if zeros >= 2 or (nums[i] % k != 0 and bCircle and cSum in S):
+            if (nums[i] % k != 0 and bCircle and cSum in S):
                 return True
             
-            last_val = cSum
             S.add(cSum)
             
             
