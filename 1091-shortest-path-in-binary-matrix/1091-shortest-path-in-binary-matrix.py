@@ -12,10 +12,13 @@ class Solution:
         dp = [[0 for x in range(n)] for x in range(n)]
         
         q = []
+        e_q = []
         
         q.append( (0, 0) )
+        #q.append( (n-1, n-1) )
         
         dp[0][0] = 1
+        #dp[-1][-1] = -1
         
         step = 2
         direction = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
@@ -28,6 +31,9 @@ class Solution:
             for i in range(size):
                 r, c = q.pop(0)
                 
+                def checkLegalPosition(row, col) -> bool:
+                        return row < 0 or row >= n or col < 0 or col >= n or grid[row][col] == 1
+                
                 for br, bc in direction:
                     new_r = r + br
                     new_c = c + bc
@@ -35,7 +41,9 @@ class Solution:
                     if new_r == n-1 and new_c == n-1:
                         return step
                     
-                    if new_r < 0 or new_r >= n or new_c < 0 or new_c >= n or grid[new_r][new_c] == 1 or dp[new_r][new_c] != 0:
+                    
+                        
+                    if checkLegalPosition(new_r, new_c) or dp[new_r][new_c] > 0:
                         continue;
                     
                     q.append( (new_r, new_c) )
