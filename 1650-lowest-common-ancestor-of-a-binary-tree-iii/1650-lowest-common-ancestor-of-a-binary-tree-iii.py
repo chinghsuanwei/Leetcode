@@ -12,7 +12,7 @@ class Solution:
     
     
     
-    def getPath(self, node: 'Node'):
+    def getPath(self, node: 'Node') -> (str, 'Node'):
         
         path = ""
         
