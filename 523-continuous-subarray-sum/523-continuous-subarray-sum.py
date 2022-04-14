@@ -20,8 +20,6 @@ class Solution:
         cSum = nums[0] % k
         
         S.add(cSum)
-        
-        bCircle = nums[0] >= k
         zeros = 1 if nums[0] % k == 0 else 0
         
         n = len(nums)
@@ -37,16 +35,11 @@ class Solution:
                     return True
             else:
                 zeros = 0
+                cSum %= k
+                if cSum in S:
+                    return True
             
-            bCircle |= cSum >= k
-            
-            cSum %= k
-            
-            
-            
-            if (nums[i] % k != 0 and bCircle and cSum in S):
-                return True
-            
+
             S.add(cSum)
             
             
