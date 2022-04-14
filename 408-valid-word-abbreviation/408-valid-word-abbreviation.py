@@ -4,27 +4,23 @@ class Solution:
         w_idx = 0
         a_idx = 0
         while w_idx < len(word) and a_idx < len(abbr):
-            digit = ""
-            while a_idx < len(abbr) and abbr[ a_idx ].isdigit():
-                digit += abbr[ a_idx ]
+            
+            if abbr[ a_idx ] == word[ w_idx ]:
                 a_idx += 1
-            
-            
-            
-            if digit:
-                #skip
-                if digit[0] == '0':
-                    return False
-                w_idx += int(digit)
-            else:
-                #compare 
-                #print(abbr[ a_idx ], word[ w_idx ])
-                if abbr[ a_idx ] != word[ w_idx ]:
-                    return False
                 w_idx += 1
-                a_idx += 1
-            
-            
+            elif abbr[ a_idx ] == '0':
+                return False
+            elif abbr[a_idx ].isnumeric():
+                
+                k = a_idx
+                while k < len(abbr) and abbr[ k ].isdigit():
+                    k += 1
+                
+                w_idx += int(abbr[a_idx:k]);
+                a_idx = k
+            else:
+                #not equal
+                return False
         
                 
         return a_idx == len(abbr) and w_idx == len(word)
