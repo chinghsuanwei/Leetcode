@@ -9,32 +9,34 @@ class Solution:
     
     
     def convertBST(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        
+        self.g_sum = 0
+        
         #right, mid, left
         
         # 4 6 7 8
         #8: 
         #
         
-        def dfs(root: Optional[TreeNode], parent_val: int):
+        def dfs(root: Optional[TreeNode]):
             
             if not root:
                 return 0
             
-            right_val = dfs(root.right, parent_val)
+            dfs(root.right)
             
-            root.val += right_val #right
-            child_val = root.val #self
-            child_val += dfs(root.left, parent_val + child_val) #left
-            
-            root.val += parent_val
+            val = root.val
+            root.val += self.g_sum
+            self.g_sum += val
             
             
-            #print(root.val)
+            dfs(root.left)
             
-            return child_val
+            
+            
             
         
-        dfs(root, 0)
+        dfs(root)
         
         return root
         
