@@ -7,18 +7,16 @@
 class Solution:
     def trimBST(self, root: Optional[TreeNode], low: int, high: int) -> Optional[TreeNode]:
         
-        
-        def dfs(root: Optional[TreeNode], low: int, high: int):
-            if not root:
-                return None
+        if not root:
+            return None
 
-            if root.val > high:
-                return dfs(root.left, low, high)
-            elif root.val < low:
-                return dfs(root.right, low, high)
-            else:
-                root.left = dfs(root.left, low, high)
-                root.right = dfs(root.right, low, high)
-                return root
+        if root.val > high:
+            return self.trimBST(root.left, low, high)
+        elif root.val < low:
+            return self.trimBST(root.right, low, high)
+        else:
+            root.left = self.trimBST(root.left, low, high)
+            root.right = self.trimBST(root.right, low, high)
+            return root
         
-        return dfs(root, low, high)
+        
